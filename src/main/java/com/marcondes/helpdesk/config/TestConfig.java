@@ -1,4 +1,4 @@
-package com.marcondes.helpdesk;
+package com.marcondes.helpdesk.config;
 
 import com.marcondes.helpdesk.services.DBService;
 
