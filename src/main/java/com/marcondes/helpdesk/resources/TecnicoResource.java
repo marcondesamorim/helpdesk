@@ -1,6 +1,7 @@
 package com.marcondes.helpdesk.resources;
 
 import com.marcondes.helpdesk.domain.Tecnico;
+import com.marcondes.helpdesk.domain.dtos.TecnicoDTO;
 import com.marcondes.helpdesk.services.TecnicoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/tecnicos")
 public class TecnicoResource {
 
-    // localhost:8080/tecnicos
-
     @Autowired
     private TecnicoService service;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Tecnico> findById(@PathVariable Integer id) {
+    public ResponseEntity<TecnicoDTO> findById(@PathVariable Integer id) {
         Tecnico obj = service.findById(id);
-        return ResponseEntity.ok().body(obj);
+        return ResponseEntity.ok().body(new TecnicoDTO(obj));
     }
 }
