@@ -18,6 +18,8 @@ import javax.persistence.Id;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.marcondes.helpdesk.domain.enums.Perfil;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,6 +36,7 @@ public abstract class Pessoa implements Serializable {
     protected Integer id;
     protected String nome;
 
+    @CPF
     @Column(unique = true)
     protected String cpf;
 
