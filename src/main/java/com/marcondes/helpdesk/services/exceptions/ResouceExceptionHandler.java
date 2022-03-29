@@ -21,18 +21,16 @@ public class ResouceExceptionHandler {
                 "Object Not Found!", ex.getMessage(), request.getRequestURI());
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
-
     }
 
-    @ExceptionHandler(DataAccessResourceFailureException.class)
-    public ResponseEntity<StandardError> dataAccessResourceFailureException(DataAccessResourceFailureException ex,
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<StandardError> dataIntegrityViolationException(DataIntegrityViolationException ex,
             HttpServletRequest request) {
 
         StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(),
-                "Violação de dados!", ex.getMessage(), request.getRequestURI());
+                "Violação de dados", ex.getMessage(), request.getRequestURI());
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
-
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -49,4 +47,14 @@ public class ResouceExceptionHandler {
 
     }
 
+    @ExceptionHandler(DataAccessResourceFailureException.class)
+    public ResponseEntity<StandardError> dataAccessResourceFailureException(DataAccessResourceFailureException ex,
+            HttpServletRequest request) {
+
+        StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(),
+                "Violação de dados!", ex.getMessage(), request.getRequestURI());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+
+    }
 }

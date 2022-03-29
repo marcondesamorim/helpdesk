@@ -10,6 +10,7 @@ import com.marcondes.helpdesk.domain.Tecnico;
 import com.marcondes.helpdesk.domain.dtos.TecnicoDTO;
 import com.marcondes.helpdesk.repository.PessoaRepository;
 import com.marcondes.helpdesk.repository.TecnicoRepository;
+import com.marcondes.helpdesk.services.exceptions.DataIntegrityViolationException;
 import com.marcondes.helpdesk.services.exceptions.ObjectNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,15 @@ public class TecnicoService {
         validaPorCpfEEmail(objDTO);
         oldObj = new Tecnico(objDTO);
         return repository.save(oldObj);
+    }
+
+    public void delete(Integer id) {
+        Tecnico obj = findById(id);
+        if (obj.getChamados().size() > 0) {
+            throw new DataIntegrityViolationException("Técnico possui ordens de serviço e não pode ser deletado!");
+        }
+        repository.deleteById(id);
+
     }
 
     private void validaPorCpfEEmail(TecnicoDTO objDTO) {
