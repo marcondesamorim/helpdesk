@@ -1,5 +1,8 @@
 package com.marcondes.helpdesk.resources;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.marcondes.helpdesk.domain.Chamado;
 import com.marcondes.helpdesk.domain.dtos.ChamadoDTO;
 import com.marcondes.helpdesk.services.ChamadoService;
@@ -22,6 +25,13 @@ public class ChamadoResource {
     public ResponseEntity<ChamadoDTO> findById(@PathVariable Integer id) {
         Chamado obj = service.findById(id);
         return ResponseEntity.ok().body(new ChamadoDTO(obj));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ChamadoDTO>> findAll() {
+        List<Chamado> list = service.findAll();
+        List<ChamadoDTO> listDTO = list.stream().map(obj -> new ChamadoDTO(obj)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDTO);
     }
 
 }

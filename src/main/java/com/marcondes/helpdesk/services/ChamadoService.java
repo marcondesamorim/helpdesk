@@ -1,5 +1,6 @@
 package com.marcondes.helpdesk.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.marcondes.helpdesk.domain.Chamado;
@@ -20,4 +21,7 @@ public class ChamadoService {
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id));
     }
 
+    public List<Chamado> findAll() {
+        return repository.findAll();
+    }
 }
