@@ -11,6 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class UserSS implements UserDetails {
+    private static final long serialVersionUID = 1L;
 
     private Integer id;
     private String email;
