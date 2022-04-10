@@ -1,15 +1,16 @@
 package com.marcondes.helpdesk.services;
 
+import java.util.Optional;
+
 import com.marcondes.helpdesk.domain.Pessoa;
-import com.marcondes.helpdesk.repository.PessoaRepository;
+import com.marcondes.helpdesk.repositories.PessoaRepository;
 import com.marcondes.helpdesk.security.UserSS;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
