@@ -20,56 +20,56 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-    private AuthenticationManager authenticationManager;
-    private JWTUtil jwtUtil;
+	private AuthenticationManager authenticationManager;
+	private JWTUtil jwtUtil;
 
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil) {
-        super();
-        this.authenticationManager = authenticationManager;
-        this.jwtUtil = jwtUtil;
-    }
+	public JWTAuthenticationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil) {
+		super();
+		this.authenticationManager = authenticationManager;
+		this.jwtUtil = jwtUtil;
+	}
 
-    @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
-            throws AuthenticationException {
-        try {
-            CredenciaisDTO creds = new ObjectMapper().readValue(request.getInputStream(), CredenciaisDTO.class);
-            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                    creds.getEmail(), creds.getSenha(), new ArrayList<>());
-            Authentication authentication = authenticationManager.authenticate(authenticationToken);
-            return authentication;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+	@Override
+	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+			throws AuthenticationException {
+		try {
+			CredenciaisDTO creds = new ObjectMapper().readValue(request.getInputStream(), CredenciaisDTO.class);
+			UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+					creds.getEmail(), creds.getSenha(), new ArrayList<>());
+			Authentication authentication = authenticationManager.authenticate(authenticationToken);
+			return authentication;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 
-    @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
-            Authentication authResult) throws IOException, ServletException {
+	@Override
+	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
+			Authentication authResult) throws IOException, ServletException {
 
-        String username = ((UserSS) authResult.getPrincipal()).getUsername();
-        String token = jwtUtil.generateToken(username);
-        response.setHeader("access-control-expose-headers", "Authorization");
-        response.setHeader("Authorization", "Bearer " + token);
-    }
+		String username = ((UserSS) authResult.getPrincipal()).getUsername();
+		String token = jwtUtil.generateToken(username);
+		response.setHeader("access-control-expose-headers", "Authorization");
+		response.setHeader("Authorization", "Bearer " + token);
+	}
 
-    @Override
-    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
-            AuthenticationException failed) throws IOException, ServletException {
+	@Override
+	protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
+			AuthenticationException failed) throws IOException, ServletException {
 
-        response.setStatus(401);
-        response.setContentType("application/json");
-        response.getWriter().append(json());
-    }
+		response.setStatus(401);
+		response.setContentType("application/json");
+		response.getWriter().append(json());
+	}
 
-    private CharSequence json() {
-        long date = new Date().getTime();
-        return "{"
-                + "\"timestamp\": " + date + ", "
-                + "\"status\": 401, "
-                + "\"error\": \"Não autorizado\", "
-                + "\"message\": \"Email ou senha inválidos\", "
-                + "\"path\": \"/login\"}";
-    }
+	private CharSequence json() {
+		long date = new Date().getTime();
+		return "{"
+				+ "\"timestamp\": " + date + ", "
+				+ "\"status\": 401, "
+				+ "\"error\": \"Não autorizado\", "
+				+ "\"message\": \"Email ou senha inválidos\", "
+				+ "\"path\": \"/login\"}";
+	}
 
 }

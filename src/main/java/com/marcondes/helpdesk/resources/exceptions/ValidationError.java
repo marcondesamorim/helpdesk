@@ -3,11 +3,6 @@ package com.marcondes.helpdesk.resources.exceptions;
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class ValidationError extends StandardError {
 	private static final long serialVersionUID = 1L;
 
@@ -28,4 +23,5 @@ public class ValidationError extends StandardError {
 	public void addError(String fieldName, String message) {
 		this.errors.add(new FieldMessage(fieldName, message));
 	}
+
 }

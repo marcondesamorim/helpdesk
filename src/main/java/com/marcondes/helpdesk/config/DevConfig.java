@@ -12,18 +12,17 @@ import org.springframework.context.annotation.Profile;
 @Profile("dev")
 public class DevConfig {
 
-    @Autowired
-    private DBService dbService;
+	@Autowired
+	private DBService dbService;
 
-    @Value("${spring.jpa.hibernate.ddl-auto}")
-    private String value;
+	@Value("${spring.jpa.hibernate.ddl-auto}")
+	private String value;
 
-    @Bean
-    public boolean instanciaDB() {
-        if (value.equals("create")) {
-            this.dbService.instanciaDB();
-        }
-        return false;
-    };
-
+	@Bean
+	public boolean instanciaDB() {
+		if (value.equals("create")) {
+			this.dbService.instanciaDB();
+		}
+		return false;
+	}
 }
