@@ -1,4 +1,4 @@
-package com.marcondes.helpdesk.services.exceptions;
+package com.marcondes.helpdesk.resources.exceptions;
 
 import java.io.Serializable;
 
@@ -10,7 +10,7 @@ import lombok.Setter;
 public class StandardError implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private long timestamp;
+    private Long timestamp;
     private Integer status;
     private String error;
     private String message;
@@ -20,7 +20,7 @@ public class StandardError implements Serializable {
         super();
     }
 
-    public StandardError(long timestamp, Integer status, String error, String message, String path) {
+    public StandardError(Long timestamp, Integer status, String error, String message, String path) {
         super();
         this.timestamp = timestamp;
         this.status = status;

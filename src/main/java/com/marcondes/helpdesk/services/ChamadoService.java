@@ -12,8 +12,8 @@ import com.marcondes.helpdesk.domain.Tecnico;
 import com.marcondes.helpdesk.domain.dtos.ChamadoDTO;
 import com.marcondes.helpdesk.domain.enums.Prioridade;
 import com.marcondes.helpdesk.domain.enums.Status;
-import com.marcondes.helpdesk.repository.ChamadoRepository;
-import com.marcondes.helpdesk.services.exceptions.ObjectNotFoundException;
+import com.marcondes.helpdesk.repositories.ChamadoRepository;
+import com.marcondes.helpdesk.services.exceptions.ObjectnotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class ChamadoService {
 
     public Chamado findById(Integer id) {
         Optional<Chamado> obj = repository.findById(id);
-        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id));
+        return obj.orElseThrow(() -> new ObjectnotFoundException("Objeto não encontrado! Id: " + id));
     }
 
     public List<Chamado> findAll() {

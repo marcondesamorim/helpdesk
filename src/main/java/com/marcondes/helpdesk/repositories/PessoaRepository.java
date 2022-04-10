@@ -1,4 +1,4 @@
-package com.marcondes.helpdesk.repository;
+package com.marcondes.helpdesk.repositories;
 
 import java.util.Optional;
 
