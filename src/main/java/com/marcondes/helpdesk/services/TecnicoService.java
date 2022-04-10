@@ -8,10 +8,10 @@ import javax.validation.Valid;
 import com.marcondes.helpdesk.domain.Pessoa;
 import com.marcondes.helpdesk.domain.Tecnico;
 import com.marcondes.helpdesk.domain.dtos.TecnicoDTO;
-import com.marcondes.helpdesk.repository.PessoaRepository;
-import com.marcondes.helpdesk.repository.TecnicoRepository;
+import com.marcondes.helpdesk.repositories.PessoaRepository;
+import com.marcondes.helpdesk.repositories.TecnicoRepository;
 import com.marcondes.helpdesk.services.exceptions.DataIntegrityViolationException;
-import com.marcondes.helpdesk.services.exceptions.ObjectNotFoundException;
+import com.marcondes.helpdesk.services.exceptions.ObjectnotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessResourceFailureException;
@@ -32,7 +32,7 @@ public class TecnicoService {
 
     public Tecnico findById(Integer id) {
         Optional<Tecnico> obj = repository.findById(id);
-        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id));
+        return obj.orElseThrow(() -> new ObjectnotFoundException("Objeto não encontrado! Id: " + id));
     }
 
     public List<Tecnico> findAll() {
