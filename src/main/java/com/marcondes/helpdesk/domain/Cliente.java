@@ -9,7 +9,6 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marcondes.helpdesk.domain.dtos.ClienteDTO;
-import com.marcondes.helpdesk.domain.enums.Perfil;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -26,12 +25,12 @@ public class Cliente extends Pessoa {
 
 	public Cliente() {
 		super();
-		addPerfil(Perfil.CLIENTE);
+		// addPerfil(Perfil.CLIENTE);
 	}
 
 	public Cliente(Integer id, String nome, String cpf, String email, String senha) {
 		super(id, nome, cpf, email, senha);
-		addPerfil(Perfil.CLIENTE);
+		// addPerfil(Perfil.CLIENTE);
 	}
 
 	public Cliente(ClienteDTO obj) {
