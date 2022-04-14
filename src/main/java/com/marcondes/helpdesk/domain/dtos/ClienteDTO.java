@@ -59,6 +59,7 @@ public class ClienteDTO implements Serializable {
 	}
 
 	public void addPerfil(Perfil perfil) {
-		this.perfis.add(perfil.getCodigo());
+		if (!this.perfis.contains(perfil.getCodigo()))
+			this.perfis.add(perfil.getCodigo());
 	}
 }

@@ -51,7 +51,7 @@ public class TecnicoDTO implements Serializable {
 		this.senha = obj.getSenha();
 		this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 		this.dataCriacao = obj.getDataCriacao();
-		addPerfil(Perfil.CLIENTE);
+		addPerfil(Perfil.TECNICO);
 	}
 
 	public Set<Perfil> getPerfis() {
@@ -59,6 +59,7 @@ public class TecnicoDTO implements Serializable {
 	}
 
 	public void addPerfil(Perfil perfil) {
-		this.perfis.add(perfil.getCodigo());
+		if (!this.perfis.contains(perfil.getCodigo()))
+			this.perfis.add(perfil.getCodigo());
 	}
 }
